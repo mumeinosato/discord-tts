@@ -13,10 +13,13 @@
   "type": "commonjs",
   "description": "",
   "devDependencies": {
+    "prisma": "^6.2.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "@discordjs/voice": "^0.18.0",
+    "@prisma/client": "^6.2.1",
     "discord.js": "^14.17.3",
     "dotenv": "^16.4.7"
   }
