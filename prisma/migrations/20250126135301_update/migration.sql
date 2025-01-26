@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Dictionary" ALTER COLUMN "server" SET DATA TYPE BIGINT;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "user" SET DATA TYPE BIGINT;

@@ -15,14 +15,14 @@ datasource db {
 
 model User {
   id     Int     @default(autoincrement()) @id
-  user   Int
+  user   BigInt     @unique
   name   String?
   voice  Int
 }
 
 model Dictionary {
   id     Int     @default(autoincrement()) @id
-  server Int
+  server BigInt
   word   String
   reading String
 }
