@@ -1,10 +1,12 @@
 import { Message } from "discord.js";
 import { randomUUID } from "crypto";
 import path from "path";
-import fs from "fs";
+import fs, { cp } from "fs";
 import { AudioPlayerStatus, createAudioPlayer, createAudioResource, getVoiceConnection } from "@discordjs/voice";
 import { voicevox } from "./utils/voicevox";
 import { getUser } from "./utils/user";
+import { get_reading } from "./utils/dictionary";
+import { console } from "inspector";
 
 const VOICE_DATA_DIR = "voice_data";
 
@@ -38,17 +40,19 @@ export async function voice(message: Message) {
     const channel = message.member?.voice.channel;
     if (!channel) return;
     
-    const user = await getUser(Number(message.author.id));
+    const user = await getUser(message.author.id);
     if (!user) return;
+
+    const text = await get_reading(message.guild?.id as string, message.content);
     
-    await playAudio(channel.guild.id, message.content, user.voice);
+    await playAudio(channel.guild.id, text, user.voice);
 }
 
 export async function join(newState: any) {
     const channel = newState.channel;
     if (!channel) return;
     
-    const user = await getUser(Number(newState.member?.user.id));
+    const user = await getUser(newState.member?.user.id);
     if (!user) return;
     
     let name;
