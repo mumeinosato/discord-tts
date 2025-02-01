@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: node_app
+    environment:
+      - TOKEN='token'
+      - guild_id='guild_id'
+      - client_id='client_id'
+      - VOICEVOX_API_URL='http://voicevox_engine:50021'
+      - DATABASE_URL="postgresql://user:password@localhost:5432/db_name?schema=public"
+    depends_on:
+      - voicevox_engine
+
+  voicevox_engine:
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    container_name: voicevox_engine
+    ports:
+      - "50021:50021"
