@@ -16,8 +16,9 @@ async function playAudio(channelId: string, text: string, voiceId: number) {
     const rootPath = path.resolve(__dirname, '..'); 
     const filepath = path.join(rootPath, 'voice_data', filename);
     try {
-        await voicevox(text, filepath, voiceId);
+        const voice = await voicevox(text, filepath, voiceId);
         
+        if (!voice) return;
         const resource = createAudioResource(filepath);
         const player = createAudioPlayer();
         

@@ -1,6 +1,5 @@
 import axios from "axios";
 import * as fs from "fs";
-import * as path from "path";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -27,8 +26,11 @@ export async function voicevox(text: string,filepath: string, speaker: number) {
             }
         })
 
+        return true
+
         fs.writeFileSync(filepath, Buffer.from(synthesis.data), 'binary')
     } catch (error) {
         console.error(error)
+        return false
     }
 }
