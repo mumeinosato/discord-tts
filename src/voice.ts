@@ -8,16 +8,15 @@ import { getUser } from "./utils/user";
 import { get_reading } from "./utils/dictionary";
 import { console } from "inspector";
 
-const VOICE_DATA_DIR = "voice_data";
-
 async function playAudio(channelId: string, text: string, voiceId: number) {
     const connection = getVoiceConnection(channelId);
     if (!connection) return;
     
     const filename = `${randomUUID()}.wav`;
-    const filepath = path.join(VOICE_DATA_DIR, filename);
+    const rootPath = path.resolve(__dirname, '..'); 
+    const filepath = path.join(rootPath, 'voice_data', filename);
     try {
-        await voicevox(text, filename, voiceId);
+        await voicevox(text, filepath, voiceId);
         
         const resource = createAudioResource(filepath);
         const player = createAudioPlayer();

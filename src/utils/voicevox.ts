@@ -8,11 +8,9 @@ dotenv.config();
 const api = process.env.VOICEVOX_API_URL;
 const rpc = axios.create({baseURL: api, proxy: false});
 
-export async function voicevox(text: string,filename: string, speaker: number) {
+export async function voicevox(text: string,filepath: string, speaker: number) {
 
     try {
-        const filepath = path.join('voice_data', filename)
-
         const audio_query = await rpc.post('audio_query',null,{
             params: {
                 text: text,
