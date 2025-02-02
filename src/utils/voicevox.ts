@@ -26,9 +26,9 @@ export async function voicevox(text: string,filepath: string, speaker: number) {
             }
         })
 
-        return true
-
         fs.writeFileSync(filepath, Buffer.from(synthesis.data), 'binary')
+
+        return true
     } catch (error) {
         console.error(error)
         return false
